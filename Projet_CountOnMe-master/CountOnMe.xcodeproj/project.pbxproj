@@ -14,6 +14,11 @@
 		1FA43BDD224E569A00F565CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BDB224E569A00F565CB /* LaunchScreen.storyboard */; };
 		1FA43BE8224E569A00F565CB /* SimpleCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43BE7224E569A00F565CB /* SimpleCalcTests.swift */; };
 		1FA43BF3224E569A00F565CB /* SimpleCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43BF2224E569A00F565CB /* SimpleCalcUITests.swift */; };
+		5F4A28F626F8986A00FB3326 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28F526F8986A00FB3326 /* Addition.swift */; };
+		5F4A28F826F8B4CA00FB3326 /* Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28F726F8B4CA00FB3326 /* Multiplication.swift */; };
+		5F4A28FA26F8B4DB00FB3326 /* Soustraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28F926F8B4DB00FB3326 /* Soustraction.swift */; };
+		5F4A28FC26F8B4E500FB3326 /* Division.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28FB26F8B4E500FB3326 /* Division.swift */; };
+		5F76B36C26F91ACF00225053 /* IdentifyCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +52,11 @@
 		1FA43BEE224E569A00F565CB /* CountOnMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountOnMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA43BF2224E569A00F565CB /* SimpleCalcUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCalcUITests.swift; sourceTree = "<group>"; };
 		1FA43BF4224E569A00F565CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F4A28F526F8986A00FB3326 /* Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
+		5F4A28F726F8B4CA00FB3326 /* Multiplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplication.swift; sourceTree = "<group>"; };
+		5F4A28F926F8B4DB00FB3326 /* Soustraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soustraction.swift; sourceTree = "<group>"; };
+		5F4A28FB26F8B4E500FB3326 /* Division.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Division.swift; sourceTree = "<group>"; };
+		5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,7 @@
 		1FA43BD1224E569900F565CB /* CountOnMe */ = {
 			isa = PBXGroup;
 			children = (
+				5F76B36A26F91A9A00225053 /* Enum */,
 				5F2E9BAD26EA96100018DE27 /* Model */,
 				5F2E9BAC26EA96010018DE27 /* View */,
 				5F2E9BAB26EA95F10018DE27 /* Controller */,
@@ -143,6 +154,10 @@
 		5F2E9BAD26EA96100018DE27 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5F4A28F526F8986A00FB3326 /* Addition.swift */,
+				5F4A28F726F8B4CA00FB3326 /* Multiplication.swift */,
+				5F4A28F926F8B4DB00FB3326 /* Soustraction.swift */,
+				5F4A28FB26F8B4E500FB3326 /* Division.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +170,14 @@
 				1FA43BDE224E569A00F565CB /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5F76B36A26F91A9A00225053 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,6 +312,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA43BD5224E569900F565CB /* ViewController.swift in Sources */,
+				5F4A28F826F8B4CA00FB3326 /* Multiplication.swift in Sources */,
+				5F4A28FC26F8B4E500FB3326 /* Division.swift in Sources */,
+				5F76B36C26F91ACF00225053 /* IdentifyCalc.swift in Sources */,
+				5F4A28F626F8986A00FB3326 /* Addition.swift in Sources */,
+				5F4A28FA26F8B4DB00FB3326 /* Soustraction.swift in Sources */,
 				1FA43BD3224E569900F565CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,7 +529,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SimpleCalcTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -521,7 +551,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SimpleCalcTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
