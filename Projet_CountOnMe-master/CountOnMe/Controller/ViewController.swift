@@ -10,9 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var calc = SimpleCalc()
+    
     var elements: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
+
     // Error check computed variables
     var expressionIsCorrect: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
@@ -77,28 +80,9 @@ class ViewController: UIViewController {
             return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Démarrez un nouveau calcul", buttonTitle: "Ok", alertStyle: .cancel)
         }
         
-        // Create local copy of operations
-        var operationsToReduce = elements
-        
-        // Iterate over operations while an operand still here
-        while operationsToReduce.count > 1 {
-            let left = Int(operationsToReduce[0])!
-            let operand = operationsToReduce[1]
-            let right = Int(operationsToReduce[2])!
-            
-            let result: Int
-            switch operand {
-            case "+": result = left + right
-            case "-": result = left - right
-            case "x": result = left * right
-            case "÷": result = left / right
-            default: fatalError("Unknown operator !")
-            }
-            
-            operationsToReduce = Array(operationsToReduce.dropFirst(3))
-            operationsToReduce.insert("\(result)", at: 0)
-        }
-        textView.text.append(" = \(operationsToReduce.first!)")
+        calc.element = elements
+        calc.operation()
+        textView.text.append(" = \(calc.element.first!)")
     }
     
     private func presentAlert_Alert (alertTitle title: String, alertMessage message: String,buttonTitle titleButton: String, alertStyle style: UIAlertAction.Style ) {
