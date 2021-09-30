@@ -17,15 +17,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="candybarphone" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2TB-tg-DLR">
-                                <rect key="frame" x="100" y="199" width="120" height="170"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Symbol" translatesAutoresizingMaskIntoConstraints="NO" id="2TB-tg-DLR">
+                                <rect key="frame" x="100" y="198.5" width="120" height="171"/>
                                 <color key="tintColor" name="selectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="2TB-tg-DLR" secondAttribute="height" multiplier="7:10" id="IQ1-G8-nQ2"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count On Me" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wol-kb-G3Y">
-                                <rect key="frame" x="40" y="40" width="240" height="50.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Count On Me" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wol-kb-G3Y">
+                                <rect key="frame" x="61" y="40" width="198" height="50.5"/>
                                 <fontDescription key="fontDescription" name="Papyrus" family="Papyrus" pointSize="32"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
@@ -41,9 +41,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2TB-tg-DLR" secondAttribute="trailing" constant="100" id="IAb-cO-rbk"/>
                             <constraint firstItem="2TB-tg-DLR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="JUb-aq-CXZ"/>
                             <constraint firstItem="2TB-tg-DLR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="L96-rr-d1E"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Wol-kb-G3Y" secondAttribute="trailing" constant="40" id="aHL-n1-A5J"/>
                             <constraint firstItem="Wol-kb-G3Y" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="oIT-pw-jYF"/>
-                            <constraint firstItem="Wol-kb-G3Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="z14-FV-Vty"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -53,7 +51,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="candybarphone" catalog="system" width="97" height="128"/>
+        <image name="Symbol" width="8" height="13"/>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

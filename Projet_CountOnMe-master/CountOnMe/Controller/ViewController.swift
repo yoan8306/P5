@@ -10,23 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var calc = SimpleCalc()
-    
-    var elements: [String] {
-        return textView.text.split(separator: " ").map { "\($0)" }
-    }
-
-    // Error check computed variables
-    var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
-    }
-    var expressionHaveEnoughElement: Bool {
-        return elements.count >= 3
-    }
-    // add check if + and x they are not insert
-    var canAddOperator: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
-    }
+    var calculator = SimpleCalc()
     var expressionHaveResult: Bool {
         return textView.text.firstIndex(of: "=") != nil
     }
@@ -34,29 +18,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
-    // View Life cycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        guard let numberText = sender.title(for: .normal) else {
-            return
-        }
-        
         if expressionHaveResult {
             textView.text = ""
         }
+        guard let numberText = sender.title(for: .normal) else {
+            return
+        }
+        calculator.addNumber(element: numberText)
+//
+        
         textView.text.append(numberText)
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
-        guard canAddOperator else {
-            return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Un opérateur est déjà mis", buttonTitle: "Ok", alertStyle: .cancel)
-        }
         
+        guard let textOperator = sender.title(for: .normal) else {
+            return
+        }
+        if calculator.addOperator(addOperation: textOperator) {
+
         switch sender.titleLabel?.text {
         case "+":
             textView.text.append(" + ")
@@ -69,20 +51,19 @@ class ViewController: UIViewController {
         default:
             presentAlert_Alert(alertTitle: "Fault", alertMessage: "Erreur inconnu", buttonTitle: "Ok", alertStyle: .cancel)
         }
+        } else {
+            presentAlert_Alert(alertTitle: "Erreur", alertMessage: "Veuiller inscrire un nombre en premier", buttonTitle: "Ok", alertStyle: .cancel)
+        }
+            
     }
     
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        guard expressionIsCorrect else {
-            return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Entrez une expression correcte!", buttonTitle: "Ok", alertStyle: .cancel)
+        if let calculTotal = calculator.equal() {
+            textView.text.append(" = " + String(calculTotal))
+            calculator.resetCalcul()
+        } else {
+            presentAlert_Alert(alertTitle: "Erreur", alertMessage: "Veuillez entrer une expression correcte", buttonTitle: "Ok", alertStyle: .cancel)
         }
-        
-        guard expressionHaveEnoughElement else {
-            return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Démarrez un nouveau calcul", buttonTitle: "Ok", alertStyle: .cancel)
-        }
-        
-        calc.element = elements
-        calc.operation()
-        textView.text.append(" = \(calc.element.first!)")
     }
     
     private func presentAlert_Alert (alertTitle title: String, alertMessage message: String,buttonTitle titleButton: String, alertStyle style: UIAlertAction.Style ) {
