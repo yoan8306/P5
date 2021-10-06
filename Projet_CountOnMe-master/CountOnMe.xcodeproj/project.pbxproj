@@ -12,6 +12,8 @@
 		1FA43BD8224E569900F565CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BD6224E569900F565CB /* Main.storyboard */; };
 		1FA43BDA224E569A00F565CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BD9224E569A00F565CB /* Assets.xcassets */; };
 		1FA43BDD224E569A00F565CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BDB224E569A00F565CB /* LaunchScreen.storyboard */; };
+		5F320A50270E377C003EFAE3 /* gifCalculation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5F320A4F270E377C003EFAE3 /* gifCalculation.gif */; };
+		5F320A53270E392F003EFAE3 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F320A52270E392F003EFAE3 /* ImageExtension.swift */; };
 		5F4A28F626F8986A00FB3326 /* SimpleCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28F526F8986A00FB3326 /* SimpleCalc.swift */; };
 		5F76B36C26F91ACF00225053 /* IdentifyCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +26,8 @@
 		1FA43BD9224E569A00F565CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FA43BDC224E569A00F565CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FA43BDE224E569A00F565CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F320A4F270E377C003EFAE3 /* gifCalculation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gifCalculation.gif; sourceTree = "<group>"; };
+		5F320A52270E392F003EFAE3 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		5F4A28F526F8986A00FB3326 /* SimpleCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCalc.swift; sourceTree = "<group>"; };
 		5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyCalc.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +62,7 @@
 		1FA43BD1224E569900F565CB /* CountOnMe */ = {
 			isa = PBXGroup;
 			children = (
+				5F320A51270E3908003EFAE3 /* Extension */,
 				5F76B36A26F91A9A00225053 /* Enum */,
 				5F2E9BAD26EA96100018DE27 /* Model */,
 				5F2E9BAC26EA96010018DE27 /* View */,
@@ -95,11 +100,20 @@
 		5F2E9BAE26EA961B0018DE27 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5F320A4F270E377C003EFAE3 /* gifCalculation.gif */,
 				1FA43BD9224E569A00F565CB /* Assets.xcassets */,
 				1FA43BD2224E569900F565CB /* AppDelegate.swift */,
 				1FA43BDE224E569A00F565CB /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5F320A51270E3908003EFAE3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5F320A52270E392F003EFAE3 /* ImageExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		5F76B36A26F91A9A00225053 /* Enum */ = {
@@ -172,6 +186,7 @@
 				1FA43BDD224E569A00F565CB /* LaunchScreen.storyboard in Resources */,
 				1FA43BDA224E569A00F565CB /* Assets.xcassets in Resources */,
 				1FA43BD8224E569900F565CB /* Main.storyboard in Resources */,
+				5F320A50270E377C003EFAE3 /* gifCalculation.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +220,7 @@
 				1FA43BD5224E569900F565CB /* ViewController.swift in Sources */,
 				5F76B36C26F91ACF00225053 /* IdentifyCalc.swift in Sources */,
 				5F4A28F626F8986A00FB3326 /* SimpleCalc.swift in Sources */,
+				5F320A53270E392F003EFAE3 /* ImageExtension.swift in Sources */,
 				1FA43BD3224E569900F565CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

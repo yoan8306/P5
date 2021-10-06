@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eqK-jh-KKu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eqK-jh-KKu">
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -225,6 +225,9 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gifCalculation.gif" translatesAutoresizingMaskIntoConstraints="NO" id="NvX-ra-vtr">
+                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AWJ-Vl-uau"/>
                         <color key="backgroundColor" red="0.87536688539999996" green="0.84808511389999996" blue="0.83804947389999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,14 +236,19 @@
                             <constraint firstItem="AWJ-Vl-uau" firstAttribute="bottom" secondItem="OTe-AS-Yxg" secondAttribute="bottom" id="92p-NP-lKc"/>
                             <constraint firstItem="OTe-AS-Yxg" firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" id="94y-qX-tts"/>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" id="Doz-2Q-idm"/>
+                            <constraint firstItem="NvX-ra-vtr" firstAttribute="trailing" secondItem="AWJ-Vl-uau" secondAttribute="trailing" id="FjQ-f5-RpV"/>
+                            <constraint firstItem="NvX-ra-vtr" firstAttribute="top" secondItem="eIh-hr-C95" secondAttribute="top" id="HAV-fa-bZm"/>
                             <constraint firstItem="OTe-AS-Yxg" firstAttribute="leading" secondItem="T2H-yn-nBB" secondAttribute="leading" id="NHw-iN-ave"/>
                             <constraint firstItem="isI-Gg-Iye" firstAttribute="leading" secondItem="T2H-yn-nBB" secondAttribute="leading" id="TZ1-K5-6ZO"/>
+                            <constraint firstItem="NvX-ra-vtr" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" id="Y0R-15-0Q4"/>
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="top" secondItem="AWJ-Vl-uau" secondAttribute="top" id="rWh-6E-rOU"/>
+                            <constraint firstAttribute="bottom" secondItem="NvX-ra-vtr" secondAttribute="bottom" id="trg-dV-DZI"/>
                             <constraint firstItem="AWJ-Vl-uau" firstAttribute="trailing" secondItem="T2H-yn-nBB" secondAttribute="trailing" constant="16" id="w7e-6a-eou"/>
                             <constraint firstItem="T2H-yn-nBB" firstAttribute="leading" secondItem="AWJ-Vl-uau" secondAttribute="leading" constant="16" id="xU8-Ua-TQX"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gifImage" destination="NvX-ra-vtr" id="mLI-m1-YdD"/>
                         <outlet property="textView" destination="T2H-yn-nBB" id="yqe-Yo-Sag"/>
                         <outletCollection property="numberButtons" destination="YD6-ul-r3f" collectionClass="NSMutableArray" id="c8W-uL-ZHg"/>
                         <outletCollection property="numberButtons" destination="Raa-av-x4n" collectionClass="NSMutableArray" id="P52-Zx-bMS"/>
@@ -259,4 +267,7 @@
             <point key="canvasLocation" x="87" y="220"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gifCalculation.gif" width="800" height="600"/>
+    </resources>
 </document>
