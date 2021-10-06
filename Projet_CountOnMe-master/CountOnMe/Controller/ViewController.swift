@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    var timer: Timer?
+    var counter = 0
     var calculator = SimpleCalc()
     var expressionHaveResult: Bool {
         return textView.text.firstIndex(of: "=") != nil
@@ -17,6 +18,27 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+    @IBOutlet weak var gifImage: UIImageView!
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        gifImage.loadGif(name: "gifCalculation")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                    selector: #selector(progressTimer), userInfo: nil, repeats: true)
+    }
+
+    @objc func progressTimer() {
+        counter += 1
+        if counter == 5 {
+            gifImage.isHidden = true
+            timer?.invalidate()
+            timer = nil
+        }
+    }
 
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {

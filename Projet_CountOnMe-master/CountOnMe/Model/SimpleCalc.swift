@@ -14,7 +14,10 @@ class SimpleCalc {
 
     func addNumber(number: String) {
         var stringNumber = ""
-        if let lastElement = arrayElement.last {
+        guard let lastElement = arrayElement.last else {
+            arrayElement.append(number)
+            return
+        }
             if listOperator.contains(lastElement) {
                 arrayElement.append(number)
             } else {
@@ -22,9 +25,6 @@ class SimpleCalc {
                 arrayElement.removeLast()
                 arrayElement.append(stringNumber)
             }
-        } else {
-            arrayElement.append(number)
-        }
     }
 
     func addOperator(newOperator: String) -> Bool {
@@ -36,18 +36,26 @@ class SimpleCalc {
     }
 
     func equal() -> String? {
-        var operation = ""
-        var result = 0
-        var firstNumber = ""
-        var secondNumber = ""
-        var index = 0
-        var max = arrayElement.count
+        var result: Int
 
         guard arrayElement.count >= 3 && !listOperator.contains(arrayElement.last ?? "+") else {
             return nil
         }
 
         checkPriority()
+        result = makeCalculation()
+
+        arrayElement = []
+        return String(result)
+    }
+
+    private func makeCalculation() -> Int {
+        var operation = ""
+        var result = 0
+        var firstNumber = ""
+        var secondNumber = ""
+        var index = 0
+        var max = arrayElement.count
 
         while index < max {
             firstNumber = arrayElement[0]
@@ -66,7 +74,7 @@ class SimpleCalc {
                 case "x":
                     result = left * right
                 default:
-                    print("error")
+                    break
                 }
 
                 arrayElement = Array(arrayElement.dropFirst(3))
@@ -75,8 +83,7 @@ class SimpleCalc {
             max = arrayElement.count
             index += 1
         }
-        arrayElement = []
-        return String(result)
+        return result
     }
 
     // MARK: - private func
@@ -93,18 +100,10 @@ class SimpleCalc {
     }
 
     private  func checkPriority() {
-        if checkOperation() {
+        if arrayElement.contains("-") || arrayElement.contains("+") ||
+            arrayElement.contains("÷") && arrayElement.contains("x") {
             calculationPriority()
         }
-    }
-
-    private  func checkOperation() -> Bool {
-        if arrayElement.contains("-") ||
-            arrayElement.contains("+") ||
-            arrayElement.contains("÷") && arrayElement.contains("x") {
-            return true
-        }
-        return false
     }
 
     private func calculationPriority() {
@@ -125,5 +124,6 @@ class SimpleCalc {
             }
             index += 1
         }
+
     }
 }

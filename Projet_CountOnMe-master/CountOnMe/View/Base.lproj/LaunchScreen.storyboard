@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,16 +32,23 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="2" height="-1"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gifCalculation.gif" translatesAutoresizingMaskIntoConstraints="NO" id="qZz-dB-89A">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.36697304250000001" green="0.60362869500000005" blue="0.77447026969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="qZz-dB-89A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="198-UW-SXb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qZz-dB-89A" secondAttribute="bottom" id="2cp-kU-mrn"/>
                             <constraint firstItem="Wol-kb-G3Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="BnR-Sc-s44"/>
                             <constraint firstItem="2TB-tg-DLR" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Dix-oQ-X4y"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2TB-tg-DLR" secondAttribute="trailing" constant="100" id="IAb-cO-rbk"/>
                             <constraint firstItem="2TB-tg-DLR" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="JUb-aq-CXZ"/>
                             <constraint firstItem="2TB-tg-DLR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="L96-rr-d1E"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qZz-dB-89A" secondAttribute="trailing" id="hdN-QU-ccA"/>
                             <constraint firstItem="Wol-kb-G3Y" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="oIT-pw-jYF"/>
+                            <constraint firstItem="qZz-dB-89A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tpy-Ad-vZt"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -51,7 +58,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Symbol" width="8" height="13"/>
+        <image name="Symbol" width="10" height="17"/>
+        <image name="gifCalculation.gif" width="800" height="600"/>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
