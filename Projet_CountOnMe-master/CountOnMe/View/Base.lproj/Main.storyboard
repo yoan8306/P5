@@ -225,8 +225,9 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gifCalculation.gif" translatesAutoresizingMaskIntoConstraints="NO" id="NvX-ra-vtr">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gifCalculation.gif" translatesAutoresizingMaskIntoConstraints="NO" id="NvX-ra-vtr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.99583572149999999" green="0.98051899669999998" blue="0.9352718592" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="AWJ-Vl-uau"/>

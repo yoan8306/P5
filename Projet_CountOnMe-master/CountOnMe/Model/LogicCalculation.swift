@@ -8,9 +8,10 @@
 
 import Foundation
 
-class SimpleCalc {
+class LogicCalculation {
     var arrayElement: [String] = []
-    let listOperator = ["+", "-", "x", "÷"]
+    private  let listOperator = ["+", "-", "x", "÷"]
+    private var calculationIsFinish = true
 
     func addNumber(number: String) {
         var stringNumber = ""
@@ -18,37 +19,52 @@ class SimpleCalc {
             arrayElement.append(number)
             return
         }
-            if listOperator.contains(lastElement) {
-                arrayElement.append(number)
-            } else {
-                stringNumber  = lastElement + number
-                arrayElement.removeLast()
-                arrayElement.append(stringNumber)
-            }
+        if listOperator.contains(lastElement) {
+            arrayElement.append(number)
+        } else {
+            stringNumber  = lastElement + number
+            arrayElement.removeLast()
+            arrayElement.append(stringNumber)
+        }
     }
 
-    func addOperator(newOperator: String) -> Bool {
-        if canAddOperator() {
-            arrayElement.append(newOperator)
+    func addOperator(newOperator: String) {
+        arrayElement.append(newOperator)
+    }
+
+    func equal() -> String {
+        var result: Int
+        checkPriority()
+        result = makeCalculation()
+
+        return String(result)
+    }
+
+    func isCalculationValid() -> Bool {
+        return arrayElement.count >= 3 && !listOperator.contains(arrayElement.last ?? "+")
+    }
+
+    func canAddOperator() -> Bool {
+        guard !calculationIsFinish else {
+            return false
+        }
+
+        if listOperator.contains(arrayElement.last ?? "+") {
+            return false
+        }
+        return true
+    }
+
+    func resetCalculationIfNeed() -> Bool {
+        if calculationIsFinish {
+            arrayElement = []
+            calculationIsFinish = false
             return true
         }
         return false
     }
 
-    func equal() -> String? {
-        var result: Int
-
-        guard arrayElement.count >= 3 && !listOperator.contains(arrayElement.last ?? "+") else {
-            return nil
-        }
-
-        checkPriority()
-        result = makeCalculation()
-
-        arrayElement = []
-        return String(result)
-    }
-
+    // MARK: - private func
     private func makeCalculation() -> Int {
         var operation = ""
         var result = 0
@@ -83,25 +99,13 @@ class SimpleCalc {
             max = arrayElement.count
             index += 1
         }
+        calculationIsFinish = true
         return result
     }
 
-    // MARK: - private func
-
-    private  func canAddOperator() -> Bool {
-        guard let lastElement = arrayElement.last else {
-            return false
-        }
-
-        if listOperator.contains(lastElement) {
-            return false
-        }
-        return true
-    }
-
     private  func checkPriority() {
-        if arrayElement.contains("-") || arrayElement.contains("+") ||
-            arrayElement.contains("÷") && arrayElement.contains("x") {
+        if (arrayElement.contains("-") || arrayElement.contains("+") ||
+            arrayElement.contains("÷")) && arrayElement.contains("x") {
             calculationPriority()
         }
     }
@@ -126,4 +130,5 @@ class SimpleCalc {
         }
 
     }
+
 }

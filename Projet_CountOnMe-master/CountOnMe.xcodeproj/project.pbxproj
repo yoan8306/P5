@@ -14,8 +14,8 @@
 		1FA43BDD224E569A00F565CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA43BDB224E569A00F565CB /* LaunchScreen.storyboard */; };
 		5F320A50270E377C003EFAE3 /* gifCalculation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5F320A4F270E377C003EFAE3 /* gifCalculation.gif */; };
 		5F320A53270E392F003EFAE3 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F320A52270E392F003EFAE3 /* ImageExtension.swift */; };
-		5F4A28F626F8986A00FB3326 /* SimpleCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28F526F8986A00FB3326 /* SimpleCalc.swift */; };
-		5F76B36C26F91ACF00225053 /* IdentifyCalc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */; };
+		5F4A28F626F8986A00FB3326 /* LogicCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A28F526F8986A00FB3326 /* LogicCalculation.swift */; };
+		5F76B36C26F91ACF00225053 /* ListingOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F76B36B26F91ACF00225053 /* ListingOperator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 		1FA43BDE224E569A00F565CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F320A4F270E377C003EFAE3 /* gifCalculation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = gifCalculation.gif; sourceTree = "<group>"; };
 		5F320A52270E392F003EFAE3 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
-		5F4A28F526F8986A00FB3326 /* SimpleCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCalc.swift; sourceTree = "<group>"; };
-		5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifyCalc.swift; sourceTree = "<group>"; };
+		5F4A28F526F8986A00FB3326 /* LogicCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicCalculation.swift; sourceTree = "<group>"; };
+		5F76B36B26F91ACF00225053 /* ListingOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingOperator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 		5F2E9BAD26EA96100018DE27 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5F4A28F526F8986A00FB3326 /* SimpleCalc.swift */,
+				5F4A28F526F8986A00FB3326 /* LogicCalculation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -119,7 +119,7 @@
 		5F76B36A26F91A9A00225053 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				5F76B36B26F91ACF00225053 /* IdentifyCalc.swift */,
+				5F76B36B26F91ACF00225053 /* ListingOperator.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -218,8 +218,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA43BD5224E569900F565CB /* ViewController.swift in Sources */,
-				5F76B36C26F91ACF00225053 /* IdentifyCalc.swift in Sources */,
-				5F4A28F626F8986A00FB3326 /* SimpleCalc.swift in Sources */,
+				5F76B36C26F91ACF00225053 /* ListingOperator.swift in Sources */,
+				5F4A28F626F8986A00FB3326 /* LogicCalculation.swift in Sources */,
 				5F320A53270E392F003EFAE3 /* ImageExtension.swift in Sources */,
 				1FA43BD3224E569900F565CB /* AppDelegate.swift in Sources */,
 			);
@@ -373,7 +373,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/CountOnMe/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -394,7 +394,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NLCUCTBNY2;
 				INFOPLIST_FILE = "$(SRCROOT)/CountOnMe/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

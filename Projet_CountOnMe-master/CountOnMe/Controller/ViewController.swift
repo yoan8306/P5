@@ -11,10 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     var timer: Timer?
     var counter = 0
-    var calculator = SimpleCalc()
-    var expressionHaveResult: Bool {
-        return textView.text.firstIndex(of: "=") != nil
-    }
+    var calculator = LogicCalculation()
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
@@ -42,7 +39,7 @@ class ViewController: UIViewController {
 
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        if expressionHaveResult {
+        if calculator.resetCalculationIfNeed() {
             textView.text = ""
         }
         guard let numberText = sender.title(for: .normal) else {
@@ -57,8 +54,9 @@ class ViewController: UIViewController {
             return
         }
 
-        if calculator.addOperator(newOperator: textOperator) {
-            switch sender.titleLabel?.text {
+        if calculator.canAddOperator() {
+            calculator.addOperator(newOperator: textOperator)
+            switch textOperator {
             case "+":
                 textView.text.append(" + ")
             case "÷":
@@ -68,31 +66,27 @@ class ViewController: UIViewController {
             case "-":
                 textView.text.append(" - ")
             default:
-                presentAlert_Alert(alertTitle: "Fault",
-                                   alertMessage: "Erreur inconnu",
-                                   buttonTitle: "Ok", alertStyle: .cancel)
+                presentAlert_Alert(alertMessage: "Erreur inconnu")
             }
 
         } else {
-            presentAlert_Alert(alertTitle: "Erreur",
-                               alertMessage: "Veuillez inscrire un nombre avant",
-                               buttonTitle: "Ok", alertStyle: .cancel)
+            presentAlert_Alert(alertMessage: "Veuillez inscrire un nombre avant")
         }
     }
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        if let calculTotal = calculator.equal() {
-            textView.text.append(" = " + calculTotal)
+
+        if calculator.isCalculationValid() {
+            textView.text.append(" = " + calculator.equal())
         } else {
-            presentAlert_Alert(alertTitle: "Erreur",
-                               alertMessage: "Veuillez entrer une expression correcte",
-                               buttonTitle: "Ok", alertStyle: .cancel)
+            presentAlert_Alert(alertMessage: "Veuillez entrer une expression correcte")
         }
     }
 
-    private func presentAlert_Alert (alertTitle title: String,
+    private func presentAlert_Alert (alertTitle title: String = "Erreur",
                                      alertMessage message: String,
-                                     buttonTitle titleButton: String, alertStyle style: UIAlertAction.Style ) {
+                                     buttonTitle titleButton: String = "Ok",
+                                     alertStyle style: UIAlertAction.Style = .cancel) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: titleButton, style: style, handler: nil)
         alertVC.addAction(action)

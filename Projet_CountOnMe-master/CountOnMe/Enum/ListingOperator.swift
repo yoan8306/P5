@@ -8,6 +8,9 @@
 
 import Foundation
 
-enum IdentifyCalc {
-    case addition; case subtract; case multiplication; case division
+enum ListingOperator: CaseIterable {
+    case addition
+    case subtract
+    case multiplication
+    case division
 }
