@@ -33,7 +33,7 @@ class LogicCalculation {
     }
 
     func equal() -> String {
-        var result: Int
+        var result: Float
         checkPriority()
         result = makeCalculation()
 
@@ -65,9 +65,9 @@ class LogicCalculation {
     }
 
     // MARK: - private func
-    private func makeCalculation() -> Int {
+    private func makeCalculation() -> Float {
         var operation = ""
-        var result = 0
+        var result: Float = 0.0
         var firstNumber = ""
         var secondNumber = ""
         var index = 0
@@ -78,7 +78,7 @@ class LogicCalculation {
             operation = arrayElement[1]
             secondNumber = arrayElement[2]
 
-            if  let left = Int(firstNumber), let right = Int(secondNumber) {
+            if  let left = Float(firstNumber), let right = Float(secondNumber) {
 
                 switch operation {
                 case "+":
@@ -104,22 +104,32 @@ class LogicCalculation {
     }
 
     private  func checkPriority() {
-        if (arrayElement.contains("-") || arrayElement.contains("+") ||
-            arrayElement.contains("÷")) && arrayElement.contains("x") {
-            calculationPriority()
+        if (arrayElement.contains("-") || arrayElement.contains("+"))
+            && (arrayElement.contains("x") || arrayElement.contains("÷")) {
+            calculationPriority(operation: "x")
+            calculationPriority(operation: "÷")
         }
     }
 
-    private func calculationPriority() {
+    private func calculationPriority(operation: String) {
         var max = arrayElement.count - 1
         var index = 0
-        var result = 0
+        var result: Float = 0.0
         var newElement = ""
 
         while index < max {
-            if arrayElement[index] == "x" {
-                if let leftNumber = Int(arrayElement[index - 1]), let rightNumber = Int(arrayElement[index + 1]) {
-                    result = leftNumber * rightNumber
+            if arrayElement[index] == operation {
+                if let leftNumber = Float(arrayElement[index - 1]), let rightNumber = Float(arrayElement[index + 1]) {
+
+                    switch operation {
+                    case "x":
+                        result = leftNumber * rightNumber
+                    case "÷":
+                        result = leftNumber/rightNumber
+                    default:
+                        break
+                    }
+
                     newElement = String(result)
                     arrayElement.removeSubrange(index - 1 ... index + 1)
                     arrayElement.insert(newElement, at: index - 1)
