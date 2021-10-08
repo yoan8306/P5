@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum ListingOperator: CaseIterable {
-    case addition
-    case subtract
-    case multiplication
-    case division
+enum ListingOperator: String, CaseIterable {
+    case addition = "+"
+    case subtract = "-"
+    case multiplication = "x"
+    case division = "÷"
 }

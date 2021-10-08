@@ -10,7 +10,7 @@ import Foundation
 
 class LogicCalculation {
     var arrayElement: [String] = []
-    private  let listOperator = ["+", "-", "x", "÷"]
+    private  let listOperator = ListingOperator.allCases
     private var calculationIsFinish = true
 
     func addNumber(number: String) {
@@ -19,7 +19,8 @@ class LogicCalculation {
             arrayElement.append(number)
             return
         }
-        if listOperator.contains(lastElement) {
+
+        if checkLastElementIsOperator(lastElement: lastElement) {
             arrayElement.append(number)
         } else {
             stringNumber  = lastElement + number
@@ -41,7 +42,7 @@ class LogicCalculation {
     }
 
     func isCalculationValid() -> Bool {
-        return arrayElement.count >= 3 && !listOperator.contains(arrayElement.last ?? "+")
+        return arrayElement.count >= 3 && !checkLastElementIsOperator(lastElement: arrayElement.last ?? "+")
     }
 
     func canAddOperator() -> Bool {
@@ -49,7 +50,7 @@ class LogicCalculation {
             return false
         }
 
-        if listOperator.contains(arrayElement.last ?? "+") {
+        if checkLastElementIsOperator(lastElement: arrayElement.last ?? "+") {
             return false
         }
         return true
@@ -66,7 +67,7 @@ class LogicCalculation {
 
     // MARK: - private func
     private func makeCalculation() -> Float {
-        var operation = ""
+        var operation: ListingOperator = .addition
         var result: Float = 0.0
         var firstNumber = ""
         var secondNumber = ""
@@ -75,22 +76,23 @@ class LogicCalculation {
 
         while index < max {
             firstNumber = arrayElement[0]
-            operation = arrayElement[1]
             secondNumber = arrayElement[2]
+
+            for element in listOperator where element.rawValue == arrayElement[1] {
+                    operation = element
+            }
 
             if  let left = Float(firstNumber), let right = Float(secondNumber) {
 
                 switch operation {
-                case "+":
+                case .addition:
                     result = left + right
-                case "-":
+                case .subtract:
                     result = left - right
-                case "÷":
+                case .division:
                     result = left / right
-                case "x":
+                case .multiplication:
                     result = left * right
-                default:
-                    break
                 }
 
                 arrayElement = Array(arrayElement.dropFirst(3))
@@ -106,28 +108,27 @@ class LogicCalculation {
     private  func checkPriority() {
         if (arrayElement.contains("-") || arrayElement.contains("+"))
             && (arrayElement.contains("x") || arrayElement.contains("÷")) {
-            calculationPriority(operation: "x")
-            calculationPriority(operation: "÷")
+            calculationPriority(operation: .multiplication)
+            calculationPriority(operation: .division)
         }
     }
 
-    private func calculationPriority(operation: String) {
+    private func calculationPriority(operation: ListingOperator) {
         var max = arrayElement.count - 1
         var index = 0
         var result: Float = 0.0
         var newElement = ""
 
         while index < max {
-            if arrayElement[index] == operation {
+            if arrayElement[index] == operation.rawValue {
                 if let leftNumber = Float(arrayElement[index - 1]), let rightNumber = Float(arrayElement[index + 1]) {
 
                     switch operation {
-                    case "x":
+                    case .multiplication:
                         result = leftNumber * rightNumber
-                    case "÷":
+                    case .division:
                         result = leftNumber/rightNumber
-                    default:
-                        break
+                    default: break
                     }
 
                     newElement = String(result)
@@ -139,6 +140,13 @@ class LogicCalculation {
             index += 1
         }
 
+    }
+
+    private func checkLastElementIsOperator(lastElement: String) -> Bool {
+        for element in listOperator where element.rawValue == lastElement {
+                return true
+        }
+        return false
     }
 
 }
