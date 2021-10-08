@@ -9,105 +9,87 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    var elements: [String] {
-        return textView.text.split(separator: " ").map { "\($0)" }
-    }
-    // Error check computed variables
-    var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
-    }
-    var expressionHaveEnoughElement: Bool {
-        return elements.count >= 3
-    }
-    // add check if + and x they are not insert
-    var canAddOperator: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
-    }
-    var expressionHaveResult: Bool {
-        return textView.text.firstIndex(of: "=") != nil
-    }
-    
+    var timer: Timer?
+    var counter = 0
+    var calculator = LogicCalculation()
+
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
-    
-    // View Life cycles
+    @IBOutlet weak var gifImage: UIImageView!
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        gifImage.loadGif(name: "gifCalculation")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self,
+                    selector: #selector(progressTimer), userInfo: nil, repeats: true)
     }
-    
+
+    @objc func progressTimer() {
+        counter += 1
+        if counter == 5 {
+            gifImage.isHidden = true
+            timer?.invalidate()
+            timer = nil
+        }
+    }
+
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
+        if calculator.resetCalculationIfNeed() {
+            textView.text = ""
+        }
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-        
-        if expressionHaveResult {
-            textView.text = ""
-        }
+        calculator.addNumber(number: numberText)
         textView.text.append(numberText)
     }
-    
+
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
-        guard canAddOperator else {
-            return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Un opérateur est déjà mis", buttonTitle: "Ok", alertStyle: .cancel)
+        guard let textOperator = sender.title(for: .normal) else {
+            return
         }
-        
-        switch sender.titleLabel?.text {
-        case "+":
-            textView.text.append(" + ")
-        case "÷":
-            textView.text.append(" ÷ ")
-        case "x":
-            textView.text.append(" x ")
-        case "-":
-            textView.text.append(" - ")
-        default:
-            presentAlert_Alert(alertTitle: "Fault", alertMessage: "Erreur inconnu", buttonTitle: "Ok", alertStyle: .cancel)
-        }
-    }
-    
-    @IBAction func tappedEqualButton(_ sender: UIButton) {
-        guard expressionIsCorrect else {
-            return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Entrez une expression correcte!", buttonTitle: "Ok", alertStyle: .cancel)
-        }
-        
-        guard expressionHaveEnoughElement else {
-            return presentAlert_Alert(alertTitle: "Zéro", alertMessage: "Démarrez un nouveau calcul", buttonTitle: "Ok", alertStyle: .cancel)
-        }
-        
-        // Create local copy of operations
-        var operationsToReduce = elements
-        
-        // Iterate over operations while an operand still here
-        while operationsToReduce.count > 1 {
-            let left = Int(operationsToReduce[0])!
-            let operand = operationsToReduce[1]
-            let right = Int(operationsToReduce[2])!
-            
-            let result: Int
-            switch operand {
-            case "+": result = left + right
-            case "-": result = left - right
-            case "x": result = left * right
-            case "÷": result = left / right
-            default: fatalError("Unknown operator !")
+
+        if calculator.canAddOperator() {
+            calculator.addOperator(newOperator: textOperator)
+            switch textOperator {
+            case "+":
+                textView.text.append(" + ")
+            case "÷":
+                textView.text.append(" ÷ ")
+            case "x":
+                textView.text.append(" x ")
+            case "-":
+                textView.text.append(" - ")
+            default:
+                presentAlert_Alert(alertMessage: "Erreur inconnu")
             }
-            
-            operationsToReduce = Array(operationsToReduce.dropFirst(3))
-            operationsToReduce.insert("\(result)", at: 0)
+
+        } else {
+            presentAlert_Alert(alertMessage: "Veuillez inscrire un nombre avant")
         }
-        textView.text.append(" = \(operationsToReduce.first!)")
     }
-    
-    private func presentAlert_Alert (alertTitle title: String, alertMessage message: String,buttonTitle titleButton: String, alertStyle style: UIAlertAction.Style ) {
+
+    @IBAction func tappedEqualButton(_ sender: UIButton) {
+
+        if calculator.isCalculationValid() {
+            textView.text.append(" = " + calculator.equal())
+        } else {
+            presentAlert_Alert(alertMessage: "Veuillez entrer une expression correcte")
+        }
+    }
+
+    private func presentAlert_Alert (alertTitle title: String = "Erreur",
+                                     alertMessage message: String,
+                                     buttonTitle titleButton: String = "Ok",
+                                     alertStyle style: UIAlertAction.Style = .cancel) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: titleButton, style: style, handler: nil)
         alertVC.addAction(action)
         present(alertVC, animated: true, completion: nil)
     }
-    
-    
 }
-
