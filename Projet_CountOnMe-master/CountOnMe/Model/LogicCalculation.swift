@@ -14,6 +14,8 @@ class LogicCalculation {
     var calculationIsFinish = false
     private  let listOperator = Operator.allCases
 
+    /// Add number in array Element
+    /// - Parameter number: number enter by user
     func addNumber(number: String) {
         guard let lastElement = arrayElement.last else {
             arrayElement.append(number)
@@ -28,15 +30,21 @@ class LogicCalculation {
         }
     }
 
+    /// Add operator in array Element
+    /// - Parameter newOperator: Operator enter by user
     func addOperator(newOperator: String) {
         arrayElement.append(newOperator)
     }
 
+    /// Make calculation
+    /// - Returns: return result in String
     func equal() -> String {
         checkPriority()
         return makeCalculation()
     }
 
+    /// Check if expression for calculation is correct
+    /// - Returns: return true if correct or false if incorrect
     func isCalculationValid() -> Bool {
         guard let lastElement = arrayElement.last else {
             return false
@@ -44,6 +52,8 @@ class LogicCalculation {
         return arrayElement.count >= 3 && !lastElementIsOperator(lastElement: lastElement)
     }
 
+    /// check can add operator
+    /// - Returns: true if can add operator or false if can't add operator
     func canAddOperator() -> Bool {
         guard !calculationIsFinish, let lastElement = arrayElement.last else {
             return false
@@ -52,6 +62,7 @@ class LogicCalculation {
         return !lastElementIsOperator(lastElement: lastElement)
     }
 
+    /// if calculation is finish empty arrayElement and start new calculation
     func resetCalculationIfNeed() {
         guard calculationIsFinish else {
             return
@@ -60,16 +71,21 @@ class LogicCalculation {
         calculationIsFinish = false
     }
 
+    /// empty arrayElement and start new calculation
     func resetCalculation() {
         arrayElement = []
         calculationIsFinish = false
     }
 
+    /// transform arrayElement to string for textView
+    /// - Returns: arrayElement to string
     func formatCalculToText() -> String {
         return arrayElement.joined(separator: " ")
     }
 
     // MARK: - private func
+    /// calcule all Element in arrayElement without priority
+    /// - Returns: return sum total all elements
     private func makeCalculation() -> String {
 
         var result: Float = 0.0
@@ -84,7 +100,7 @@ class LogicCalculation {
                 case .addition:
                     result += makeAddition(leftNumber: left, rightNumber: right)
                 case .subtract:
-                    result += makeSubtract(leftNumber: left, rightNumber: right)
+                    result += makeSubtraction(leftNumber: left, rightNumber: right)
                 case .division:
                     guard let calculation = makeDivision(leftNumber: left, rightNumber: right) else {
                         calculationIsFinish = true
@@ -101,14 +117,29 @@ class LogicCalculation {
         return String(result)
     }
 
+    /// make addition
+    /// - Parameters:
+    ///   - leftNumber: number before operator
+    ///   - rightNumber: number after operator
+    /// - Returns: return result of addition
     private func makeAddition(leftNumber: Float, rightNumber: Float) -> Float {
         return leftNumber + rightNumber
     }
 
-    private func makeSubtract(leftNumber: Float, rightNumber: Float) -> Float {
+    /// make subtraction
+    /// - Parameters:
+    ///   - leftNumber: number before operator
+    ///   - rightNumber: number after operator
+    /// - Returns: return result of subtraction
+    private func makeSubtraction(leftNumber: Float, rightNumber: Float) -> Float {
         return leftNumber - rightNumber
     }
 
+    /// make division
+    /// - Parameters:
+    ///   - leftNumber: number before operator
+    ///   - rightNumber: number after operator
+    /// - Returns: return result of division if possible
     private func makeDivision(leftNumber: Float, rightNumber: Float) -> Float? {
         guard rightNumber != 0 else {
             return nil
@@ -116,10 +147,16 @@ class LogicCalculation {
         return leftNumber / rightNumber
     }
 
+    /// make multiplication
+    /// - Parameters:
+    ///   - leftNumber: number before operator
+    ///   - rightNumber: number after operator
+    /// - Returns: return result of multiplication
     private func makeMultiplication(leftNumber: Float, rightNumber: Float) -> Float {
         return leftNumber * rightNumber
     }
 
+    /// check if calculation need calcul priority
     private  func checkPriority() {
 
         if (arrayElement.contains(Operator.subtract.rawValue) ||
@@ -132,6 +169,8 @@ class LogicCalculation {
         }
     }
 
+    /// make calcul priority multiplication or division
+    /// - Parameter operation: make operation multiplication or division
     private func calculationPriority(operation: Operator) {
         var max = arrayElement.count - 1
         var index = 0
@@ -166,6 +205,9 @@ class LogicCalculation {
         }
     }
 
+    /// check if last element in array is operator
+    /// - Parameter lastElement: element in arrayElement
+    /// - Returns: true if last element is operator and false if isn't it
     private func lastElementIsOperator(lastElement: String) -> Bool {
         for element in listOperator where element.rawValue == lastElement {
             return true

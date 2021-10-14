@@ -20,6 +20,7 @@ class LogicCalculationTestCase: XCTestCase {
         result = ""
     }
 
+    /// Test addition simple
     func testGivenAddition_WhenPressEqual_ThenMakeCalculation () {
         givenAddition()
 
@@ -29,6 +30,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(calculator.calculationIsFinish)
     }
 
+    /// Test subtract simple
     func testGivenSubtract_WhenPressEqual_ThenMakeCalculation () {
         givenSubtract()
 
@@ -37,6 +39,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(result == "1.0")
     }
 
+    /// Test division simple
     func testGivenDivision_WhenPressEqual_ThenMakeCalculation () {
         givenDivision()
 
@@ -45,6 +48,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(result == "23.0")
     }
 
+    /// Test multiplication simple
     func testGivenMultiplication_WhenPressEqual_ThenMakeCalculation () {
         givenMultiplication()
 
@@ -53,16 +57,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(result == "100.0")
     }
 
-    func testGivenAddition_WhenPressTwoOperators_ThenLastOperatorIsNotInArray () {
-        givenAddition()
-
-        pressOperator(operatorCalculation: "÷")
-        pressOperator(operatorCalculation: "+")
-
-        XCTAssertTrue(calculator.arrayElement == ["34", "+", "44", "÷"])
-        XCTAssertFalse(calculator.calculationIsFinish)
-    }
-
+    /// Test division by zero
     func testGivenDivisionByZero_WhenPressEqual_ThenResultEqualErreurAndCalculationIsFinished () {
         pressNumber(number: "8")
         pressOperator(operatorCalculation: "÷")
@@ -74,6 +69,18 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(calculator.calculationIsFinish)
     }
 
+    /// Test insert two operators
+    func testGivenAddition_WhenPressTwoOperators_ThenLastOperatorIsNotInArray () {
+        givenAddition()
+
+        pressOperator(operatorCalculation: "÷")
+        pressOperator(operatorCalculation: "+")
+
+        XCTAssertTrue(calculator.arrayElement == ["34", "+", "44", "÷"])
+        XCTAssertFalse(calculator.calculationIsFinish)
+    }
+
+    /// Test calculation priority
     func testGivenCalculaltionWithPriority_WhenPressEqual_ThenMakeMultiplicationFirst () {
         givenAddition()
         pressOperator(operatorCalculation: "x")
@@ -84,6 +91,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(result == "1046.0")
     }
 
+    /// Test calculation priority with division by zéro
     func testGivenCalculationPriorityWithDivisionByZero_WhenPressEqual_ThenResultEqualErreur () {
         givenAddition()
         pressOperator(operatorCalculation: "x")
@@ -99,6 +107,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(calculator.calculationIsFinish)
     }
 
+    /// Test calculation invalid
     func testGivenCalculationIsIncomplete_WhenPressEqual_ThenResultIsEmpty () {
         pressNumber(number: "3")
         pressOperator(operatorCalculation: "÷")
@@ -111,6 +120,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertFalse(calculator.calculationIsFinish)
     }
 
+    /// calculation empty and press Equal
     func testGivenCalculationIsEmpty_WhenPressEqual_ThenResultIsEmptyCanAddOperatorIsFalse () {
         result = pressEqual()
 
@@ -119,6 +129,7 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertFalse(calculator.canAddOperator())
     }
 
+    /// Test reset arrayElement
     func testGivenCalculationHaveAddition_WhenPressResetButton_ThenArrayElementIsEmpty () {
         givenAddition()
 
@@ -128,24 +139,33 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertFalse(calculator.isCalculationValid())
     }
 
+// MARK: - Private function
+
+    /// Add number in arrayElement
+    /// - Parameter number: number to insert
     private func pressNumber(number: String) {
             calculator.resetCalculationIfNeed()
             calculator.addNumber(number: number)
     }
 
+    /// add operator in arrayElement
+    /// - Parameter operatorCalculation: operator to insert
     private func pressOperator(operatorCalculation: String) {
         if  calculator.canAddOperator() {
             calculator.addOperator(newOperator: operatorCalculation)
         }
     }
 
+    /// Launch calculation
+    /// - Returns: result calculation
     private func pressEqual() -> String {
-        if calculator.isCalculationValid() {
-            return calculator.equal()
+       guard calculator.isCalculationValid() else {
+           return ""
         }
-       return ""
+        return calculator.equal()
     }
 
+    /// create addition
     private func givenAddition() {
         pressNumber(number: "3")
         pressNumber(number: "4")
@@ -154,6 +174,7 @@ class LogicCalculationTestCase: XCTestCase {
         pressNumber(number: "4")
     }
 
+    /// create division
     private func givenDivision() {
         pressNumber(number: "4")
         pressNumber(number: "6")
@@ -161,12 +182,14 @@ class LogicCalculationTestCase: XCTestCase {
         pressNumber(number: "2")
     }
 
+    /// create subtract
     private func givenSubtract() {
         pressNumber(number: "3")
         pressOperator(operatorCalculation: "-")
         pressNumber(number: "2")
     }
 
+    /// create multiplication
     private func givenMultiplication() {
         pressNumber(number: "5")
         pressNumber(number: "0")

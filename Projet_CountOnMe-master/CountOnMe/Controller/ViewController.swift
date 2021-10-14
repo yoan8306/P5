@@ -18,17 +18,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var gifImage: UIImageView!
 
+    // MARK: - Life Cycle
+    /// Launch Animation on image
+    /// - Parameter animated: <#animated description#>
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gifImage.loadGif(name: "gifCalculation")
     }
 
+    /// init and start timer
     override func viewDidLoad() {
         super.viewDidLoad()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,
                     selector: #selector(progressTimer), userInfo: nil, repeats: true)
     }
 
+    // MARK: - Action
+    /// Timer for presentedImage
     @objc func progressTimer() {
         counter += 1
         if counter == 5 {
@@ -40,12 +46,16 @@ class ViewController: UIViewController {
 
     // View actions
 
+    /// erase calculations on going
+    /// - Parameter sender: AC button
     @IBAction func resetCalcul(_ sender: UIButton) {
         calculator.resetCalculation()
         resetButton.setTitle("AC", for: .normal)
         textView.text = calculator.formatCalculToText()
     }
 
+    /// add number in calculation
+    /// - Parameter sender: numbers buttons
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal) else {
             return
@@ -56,6 +66,8 @@ class ViewController: UIViewController {
         resetButton.setTitle("C", for: .normal)
     }
 
+    /// add operator on calculation
+    /// - Parameter sender: are operators buttons
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let textOperator = sender.title(for: .normal), calculator.canAddOperator() else {
             presentAlert_Alert(alertMessage: "Veuillez inscrire un nombre avant")
@@ -65,6 +77,8 @@ class ViewController: UIViewController {
             textView.text = calculator.formatCalculToText()
     }
 
+    /// check calculation is good and make calculation
+    /// - Parameter sender: equal button
     @IBAction func tappedEqualButton(_ sender: UIButton) {
 
         guard !calculator.calculationIsFinish else {
@@ -79,7 +93,9 @@ class ViewController: UIViewController {
             presentAlert_Alert(alertMessage: "Veuillez entrer une expression correcte")
         }
     }
+// MARK: - Private function
 
+    /// Present alert message to user
     private func presentAlert_Alert (alertTitle title: String = "Erreur",
                                      alertMessage message: String,
                                      buttonTitle titleButton: String = "Ok",
