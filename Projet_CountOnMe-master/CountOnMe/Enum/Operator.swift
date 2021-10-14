@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ListingOperator: String, CaseIterable {
+enum Operator: String, CaseIterable {
     case addition = "+"
     case subtract = "-"
     case multiplication = "x"

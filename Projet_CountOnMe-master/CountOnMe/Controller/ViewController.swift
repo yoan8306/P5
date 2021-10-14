@@ -15,6 +15,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var gifImage: UIImageView!
 
     override func viewWillAppear(_ animated: Bool) {
@@ -38,43 +39,39 @@ class ViewController: UIViewController {
     }
 
     // View actions
+
+    @IBAction func resetCalcul(_ sender: UIButton) {
+        calculator.resetCalculation()
+        resetButton.setTitle("AC", for: .normal)
+        textView.text = calculator.formatCalculToText()
+    }
+
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        if calculator.resetCalculationIfNeed() {
-            textView.text = ""
-        }
         guard let numberText = sender.title(for: .normal) else {
             return
         }
+        calculator.resetCalculationIfNeed()
         calculator.addNumber(number: numberText)
-        textView.text.append(numberText)
+        textView.text = calculator.formatCalculToText()
+        resetButton.setTitle("C", for: .normal)
     }
 
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
-        guard let textOperator = sender.title(for: .normal) else {
+        guard let textOperator = sender.title(for: .normal), calculator.canAddOperator() else {
+            presentAlert_Alert(alertMessage: "Veuillez inscrire un nombre avant")
             return
         }
-
-        if calculator.canAddOperator() {
             calculator.addOperator(newOperator: textOperator)
-            switch textOperator {
-            case "+":
-                textView.text.append(" + ")
-            case "÷":
-                textView.text.append(" ÷ ")
-            case "x":
-                textView.text.append(" x ")
-            case "-":
-                textView.text.append(" - ")
-            default:
-                presentAlert_Alert(alertMessage: "Erreur inconnu")
-            }
-
-        } else {
-            presentAlert_Alert(alertMessage: "Veuillez inscrire un nombre avant")
-        }
+            textView.text = calculator.formatCalculToText()
     }
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
+
+        guard !calculator.calculationIsFinish else {
+            presentAlert_Alert(alertMessage: "Le calcule est terminé."
+                               + "\nPressez un nombre pour commencer un nouveau calcule.")
+            return
+        }
 
         if calculator.isCalculationValid() {
             textView.text.append(" = " + calculator.equal())
