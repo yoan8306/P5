@@ -138,6 +138,35 @@ class LogicCalculationTestCase: XCTestCase {
         XCTAssertTrue(calculator.arrayElement == [])
         XCTAssertFalse(calculator.isCalculationValid())
     }
+    
+    /// Test reset calculation
+    func testGivenAddition_WhenResetCalculation_ThenArrayElementIsEmpty () {
+        givenAddition()
+
+        calculator.resetCalculation()
+
+        XCTAssertTrue(calculator.arrayElement == [])
+    }
+    
+    /// Test transform arrayElement to String
+    func testGivenAddition_WhenFormatToText_ThenResultEqualArrayElementIsAddition () {
+        givenAddition()
+
+        result = calculator.arrayElement.joined(separator: " ")
+
+        XCTAssertTrue(calculator.formatCalculToText() == result)
+    }
+    
+    /// Test can start new calculation after equal
+    func testGivenAddition_WhenAfterResultPressAnotherNumber_ThenArrayElemntCopntainsOneElement () {
+        givenAddition()
+        
+        result = pressEqual()
+        
+        pressNumber(number: "3")
+        
+        XCTAssertTrue(calculator.arrayElement == ["3"])
+    }
 
 // MARK: - Private function
 

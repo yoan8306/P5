@@ -9,10 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+
+    // MARK: - Proporties
     var timer: Timer?
     var counter = 0
     var calculator = LogicCalculation()
 
+    // MARK: - IBOutlets
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet weak var resetButton: UIButton!
@@ -20,7 +23,7 @@ class ViewController: UIViewController {
 
     // MARK: - Life Cycle
     /// Launch Animation on image
-    /// - Parameter animated: <#animated description#>
+    /// - Parameter animated: animation willAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gifImage.loadGif(name: "gifCalculation")
@@ -30,9 +33,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,
-                    selector: #selector(progressTimer), userInfo: nil, repeats: true)
+                                     selector: #selector(progressTimer), userInfo: nil, repeats: true)
     }
-
+    
     // MARK: - Action
     /// Timer for presentedImage
     @objc func progressTimer() {
@@ -44,8 +47,8 @@ class ViewController: UIViewController {
         }
     }
 
-    // View actions
-
+    // MARK: - IBActions
+    
     /// erase calculations on going
     /// - Parameter sender: AC button
     @IBAction func resetCalcul(_ sender: UIButton) {
@@ -73,17 +76,16 @@ class ViewController: UIViewController {
             presentAlert_Alert(alertMessage: "Veuillez inscrire un nombre avant")
             return
         }
-            calculator.addOperator(newOperator: textOperator)
-            textView.text = calculator.formatCalculToText()
+        calculator.addOperator(newOperator: textOperator)
+        textView.text = calculator.formatCalculToText()
     }
 
     /// check calculation is good and make calculation
     /// - Parameter sender: equal button
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-
         guard !calculator.calculationIsFinish else {
-            presentAlert_Alert(alertMessage: "Le calcule est terminé."
-                               + "\nPressez un nombre pour commencer un nouveau calcule.")
+            presentAlert_Alert(alertMessage: "Le calcul est terminé."
+                               + "\nPressez un nombre pour commencer un nouveau calcul.")
             return
         }
 
@@ -93,8 +95,8 @@ class ViewController: UIViewController {
             presentAlert_Alert(alertMessage: "Veuillez entrer une expression correcte")
         }
     }
-// MARK: - Private function
 
+    // MARK: - Private function
     /// Present alert message to user
     private func presentAlert_Alert (alertTitle title: String = "Erreur",
                                      alertMessage message: String,
