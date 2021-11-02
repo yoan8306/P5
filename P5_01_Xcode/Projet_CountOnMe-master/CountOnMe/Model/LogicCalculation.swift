@@ -97,11 +97,9 @@ class LogicCalculation {
     /// check if calculation need calcul priority
     private  func checkPriority() {
         
-        if (arrayElement.contains(Operator.subtract.rawValue) ||
-            arrayElement.contains(Operator.addition.rawValue)) &&
-            (arrayElement.contains(Operator.multiplication.rawValue) ||
+        if (arrayElement.contains(Operator.multiplication.rawValue) ||
              arrayElement.contains(Operator.division.rawValue)) {
-            
+
             calculationPriority(operation: .multiplication)
             calculationPriority(operation: .division)
         }
@@ -137,21 +135,27 @@ class LogicCalculation {
                 newElement = String(result)
                 arrayElement.removeSubrange(index - 1 ... index + 1)
                 arrayElement.insert(newElement, at: index - 1)
-                max = arrayElement.count - 1
+                max = arrayElement.count
+            } else {
+                index += 1
             }
-            index += 1
         }
     }
 
     /// calcule all Element in arrayElement without priority
     /// - Returns: return sum total all elements
     private func makeCalculation() -> String {
-
         var result: Float = 0.0
         var index = 0
         let max = arrayElement.count - 2
 
+        guard arrayElement.count > 1 else {
+            calculationIsFinish = true
+            return formatCalculToText()
+        }
+
         while index < max {
+            
             if  let left = Float(arrayElement[index]), let right = Float(arrayElement[index + 2]),
                 let operation = Operator(rawValue: arrayElement[index + 1]) {
 
