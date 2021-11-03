@@ -105,6 +105,23 @@ class LogicCalculationTestCase: XCTestCase {
         
         XCTAssertTrue( result == "14.0")
     }
+    
+    /// Test calculation with multiplication and addition
+    func testGivenCalculationWithAdditionAndMultiplication_WhenPressEqual_ThenMakeCalculation () {
+        pressNumber(number: "2")
+        pressOperator(operatorCalculation: "x")
+        pressNumber(number: "5")
+        pressOperator(operatorCalculation: "+")
+        pressNumber(number: "7")
+        pressOperator(operatorCalculation: "+")
+        pressNumber(number: "8")
+        pressOperator(operatorCalculation: "x")
+        pressNumber(number: "4")
+        
+        result = pressEqual()
+        
+        XCTAssertTrue(result == "49.0")
+    }
 
     /// Test calculation priority with division by zéro
     func testGivenCalculationPriorityWithDivisionByZero_WhenPressEqual_ThenResultEqualErreur () {

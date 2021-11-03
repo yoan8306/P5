@@ -58,7 +58,7 @@ class LogicCalculation {
         guard !calculationIsFinish, let lastElement = arrayElement.last else {
             return false
         }
-
+        
         return !lastElementIsOperator(lastElement: lastElement)
     }
 
@@ -96,11 +96,10 @@ class LogicCalculation {
 
     /// check if calculation need calcul priority
     private  func checkPriority() {
-        
-        if (arrayElement.contains(Operator.multiplication.rawValue) ||
-             arrayElement.contains(Operator.division.rawValue)) {
-
+        if arrayElement.contains(Operator.multiplication.rawValue) {
             calculationPriority(operation: .multiplication)
+        }
+        if arrayElement.contains(Operator.division.rawValue) {
             calculationPriority(operation: .division)
         }
     }
@@ -108,15 +107,12 @@ class LogicCalculation {
     /// make calcul priority multiplication or division
     /// - Parameter operation: make operation multiplication or division
     private func calculationPriority(operation: Operator) {
-        var max = arrayElement.count - 1
-        var index = 0
         var result: Float = 0.0
         var newElement = ""
 
-        while index < max {
-            if arrayElement[index] == operation.rawValue {
+        while arrayElement.contains(operation.rawValue) {
+            if let index = arrayElement.firstIndex(of: operation.rawValue) {
                 guard let left = Float(arrayElement[index - 1]), let right = Float(arrayElement[index + 1]) else {
-                    index += 1
                     continue
                 }
 
@@ -131,13 +127,9 @@ class LogicCalculation {
 
                 default: break
                 }
-
                 newElement = String(result)
                 arrayElement.removeSubrange(index - 1 ... index + 1)
                 arrayElement.insert(newElement, at: index - 1)
-                max = arrayElement.count
-            } else {
-                index += 1
             }
         }
     }
@@ -147,7 +139,8 @@ class LogicCalculation {
     private func makeCalculation() -> String {
         var result: Float = 0.0
         var index = 0
-        let max = arrayElement.count - 2
+        var newElement = ""
+        var max = arrayElement.count - 2
 
         guard arrayElement.count > 1 else {
             calculationIsFinish = true
@@ -155,26 +148,31 @@ class LogicCalculation {
         }
 
         while index < max {
-            
             if  let left = Float(arrayElement[index]), let right = Float(arrayElement[index + 2]),
                 let operation = Operator(rawValue: arrayElement[index + 1]) {
 
                 switch operation {
                 case .addition:
-                    result += makeAddition(leftNumber: left, rightNumber: right)
+                    result = makeAddition(leftNumber: left, rightNumber: right)
                 case .subtract:
-                    result += makeSubtraction(leftNumber: left, rightNumber: right)
+                    result = makeSubtraction(leftNumber: left, rightNumber: right)
                 case .division:
                     guard let calculation = makeDivision(leftNumber: left, rightNumber: right) else {
                         calculationIsFinish = true
                         return "Erreur"
                     }
-                    result += calculation
+                    result = calculation
                 case .multiplication:
-                    result += makeMultiplication(leftNumber: left, rightNumber: right)
+                    result = makeMultiplication(leftNumber: left, rightNumber: right)
                 }
+
+                newElement = String(result)
+                arrayElement.removeSubrange(index ... index + 2)
+                arrayElement.insert(newElement, at: index)
+                max = arrayElement.count - 2
+            } else {
+                index += 1
             }
-            index += 1
         }
         calculationIsFinish = true
         return String(result)
