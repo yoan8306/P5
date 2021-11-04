@@ -96,6 +96,10 @@ class LogicCalculation {
 
     /// check if calculation need calcul priority
     private  func checkPriority() {
+        guard arrayElement.contains(Operator.addition.rawValue) || arrayElement.contains(Operator.subtract.rawValue) else {
+            return
+        }
+        
         if arrayElement.contains(Operator.multiplication.rawValue) {
             calculationPriority(operation: .multiplication)
         }
@@ -121,12 +125,12 @@ class LogicCalculation {
                     result = makeMultiplication(leftNumber: left, rightNumber: right)
                 case .division:
                     guard let calculation = makeDivision(leftNumber: left, rightNumber: right)  else {
-                        return
+                       return
                     }
                     result = calculation
-
                 default: break
                 }
+                
                 newElement = String(result)
                 arrayElement.removeSubrange(index - 1 ... index + 1)
                 arrayElement.insert(newElement, at: index - 1)
